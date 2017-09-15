@@ -25,6 +25,9 @@ Planet.prototype.maxExtent = function() {
     return this.diameter/2;
 }
 Planet.prototype.render = function(pixelOffsetFromTopLeft, pixelsPerMeter) {
+    // DEBUG: pixelOffset needs to be more clear.  This is the position of 
+    // the top left corner in world space converted to pixels, so it is 
+    // subtracted from planet position before rendering.
     // Optional Arguments
     if(pixelOffsetFromTopLeft) { // Optional argument
         // DEBUG: Add error checking for p5.vector type
@@ -38,10 +41,13 @@ Planet.prototype.render = function(pixelOffsetFromTopLeft, pixelsPerMeter) {
         pixelsPerMeter = 1;
     }
 
+    pixel_center = createVector(
+                    this.positionVector.x*pixelsPerMeter - pixelOffsetFromTopLeft.x,
+                    this.positionVector.y*pixelsPerMeter - pixelOffsetFromTopLeft.y);
     // Display
     push()
     fill(10,200,10); // Green
-    ellipse(this.positionVector.x*pixelsPerMeter,this.positionVector.y*pixelsPerMeter,
+    ellipse( pixel_center.x, pixel_center.y, 
             this.diameter*pixelsPerMeter, this.diameter*pixelsPerMeter);
     pop()
 }
