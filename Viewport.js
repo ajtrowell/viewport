@@ -23,11 +23,11 @@ function Viewport(positionVector, sizeVector) {
         // DEBUG: Is copy required? ^
     }
 
-    this.zoom = //pixelsPerMeter
+    this.zoom;  //pixelsPerMeter
 }
 
 Viewport.prototype.setPosition = function(positionVector) {
-    this.positionVector = positionVector;
+    this.positionVector = positionVector.copy();
 }
 Viewport.prototype.setZoom = function(pixelsPerMeter) {
     this.zoom = pixelsPerMeter;
@@ -36,8 +36,9 @@ Viewport.prototype.setPixelsPerMeter = function(pixelsPerMeter) {
     this.setZoom(pixelsPerMeter);
 }
 Viewport.prototype.setSizeVector = function(sizeVector) {
-    // Ensure render remains square. Apply consistent zoom (pixelsPerMeter) 
-    // to both x and y axes.
+    // Ensure render remains square. 
+    // Apply consistent zoom (pixelsPerMeter) to both x and y axes.
+    // Update this.zoom
     this.sizeVector = sizeVector.copy(); // DEBUG: Needs squarenss checking.
 }
 Viewport.prototype.setSize= function(widthMeters, heightMeters) {
@@ -47,9 +48,9 @@ Viewport.prototype.isObjectInView = function(entity) {
     // Given entity is expected to have a positionVector property.
     // Given entity is expected to have a maxExtent() method.
     var maxExtent = entity.maxExtent();
-    isWithinX = (this.positionVector.x - this.sizeVector.x <= entity.positionVector.x + maxExtent) &&
+    var isWithinX = (this.positionVector.x - this.sizeVector.x <= entity.positionVector.x + maxExtent) &&
                 (entity.positionVector.x - maxExtent <= this.positionVector.x + this.sizeVector.x)
-    isWithinY = (this.positionVector.y - this.sizeVector.y <= entity.positionVector.x + maxExtent) &&
+    var isWithinY = (this.positionVector.y - this.sizeVector.y <= entity.positionVector.x + maxExtent) &&
                 (entity.positionVector.y - maxExtent <= this.positionVector.y + this.sizeVector.y)
     return isWithinX && isWithinY;
 }
@@ -59,9 +60,9 @@ Viewport.prototype.render = function(entityArray) {
     // Given entity is expected to have a maxExtent() method.
     // Given entity is expected to have a render() method.
     // Given entity is expected to have a positionVector property.
-    for(entity in entityArray) {
-        if( this.isObjectInView(entity) ) {
-            entity.render();
+    for(let i = 0; i<entityArray.length; ++i) {
+        if( this.isObjectInView(entityArray[i]) ) {
+            entityArray[i].render(); // DEBUG: << needs arguments!
         }
     }
 

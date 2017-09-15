@@ -1,17 +1,21 @@
 // World contains an array of entities to render.
 // Each entity must have a 'render()' function
 var world = []
-var viewport = []
+var viewport;
 
 
 
 
 function setup() {
-  createCanvas(400,400);
+  createCanvas(640,480);
+  // Set viewport position and size:
+  viewport = new Viewport(createVector(0,0), createVector(width,height) );
+  world = initializeEntities();
 }
 
 function draw() {
-  background(0);
+    background(0);
+    viewport.render(world);
 }
 
 
@@ -56,4 +60,11 @@ function keyReleased() {
 //  }
 //}
 
+
+function initializeEntities(){
+    entityArray = [];
+    entityArray.push(new Planet( createVector(150,150), 50)); // Position and diameter.
+    entityArray.push(new Planet( createVector(350,200), 80)); // Position and diameter.
+    return entityArray;
+}
 

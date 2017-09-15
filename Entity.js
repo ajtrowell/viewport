@@ -1,9 +1,8 @@
-// Entity class constructor
+// Plan class constructor
+// Abstract class
 function Entity(positionVector, type) {
     // set position (in sim space, in meters)
     this.positionVector = createVector(0,0);
-    // set type (square, circle)
-    this.type = type;
 }
 Entity.prototype.maxExtent = function() {
     // Return maximum sim distance from entity 
