@@ -13,6 +13,8 @@ function setup() {
   createCanvasFullScreenFixedResolution(800,600)
   // Set viewport position and size:
   viewport = new Viewport(createVector(0,0), createVector(width,height) );
+    viewport.setZoom(1);
+    viewport.setSizeVector(createVector(700,10));
   world = initializeEntities();
 }
 
@@ -20,9 +22,7 @@ function draw() {
     background(0);
     // Center on first planet:
     viewport.positionVector = world[0].positionVector.copy();
-    viewport.setZoom(1);
-    viewport.setSizeVector(createVector(700,10));
-    viewport.render(world);
+   viewport.render(world);
 }
 
 
