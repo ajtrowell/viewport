@@ -6,8 +6,11 @@ var viewport;
 
 
 
+
+
 function setup() {
-  createCanvas(640,480);
+  //createCanvas(640,480);
+  createCanvasFullScreenFixedResolution(800,600)
   // Set viewport position and size:
   viewport = new Viewport(createVector(0,0), createVector(width,height) );
   world = initializeEntities();
@@ -63,6 +66,28 @@ function keyReleased() {
 //    resizeCanvas(windowWidth, windowHeight);
 //  }
 //}
+
+function createCanvasFullScreenFixedResolution(maxWidth,maxHeight) {
+    // Must be run in the p5.js setup function.
+    var widthSetting;
+    var heightSetting;
+
+    if( maxWidth/maxHeight >= windowWidth/windowHeight) {
+        var heightSetting = maxHeight;
+        var widthSetting = heightSetting*windowWidth/windowHeight;
+    } else {
+        var widthSetting = maxWidth;
+        var heightSetting = widthSetting*windowHeight/windowWidth;
+    }
+    
+    widthSetting = Math.round(widthSetting);
+    heightSetting = Math.round(heightSetting);
+
+    const canvasElt = createCanvas(widthSetting, heightSetting).elt;
+    canvasElt.style.width = '100%', canvasElt.style.height = '100%';
+    return canvasElt;
+}
+
 
 
 function initializeEntities(){
