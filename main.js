@@ -31,16 +31,16 @@ function draw() {
 // Keyboard Inputs
 function keyPressed() {
   if(keyCode === LEFT_ARROW) {
-
+    world[0].positionVector.add(-5,0);
   } 
   if(keyCode === RIGHT_ARROW) {
-
+    world[0].positionVector.add(5,0);
   }
   if(keyCode === UP_ARROW) {
-
+    viewport.setZoom(viewport.zoom * 1.2);
   }
   if(keyCode === DOWN_ARROW) {
-
+    viewport.setZoom(viewport.zoom / 1.2);
   }
 }
 function keyReleased() {
