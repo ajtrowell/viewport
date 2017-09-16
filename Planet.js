@@ -32,6 +32,7 @@ Planet.prototype.render = function(pixelOffsetFromTopLeft, pixelsPerMeter) {
     if(pixelOffsetFromTopLeft) { // Optional argument
         // DEBUG: Add error checking for p5.vector type
         // otherwise, do nothing. We have a value.
+        // DEBUG: where is copy () needed, if at all?
     } else { // Default value if none was given.
         pixelOffsetFromTopLeft = createVector(0,0);
     }

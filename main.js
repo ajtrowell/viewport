@@ -15,6 +15,10 @@ function setup() {
 
 function draw() {
     background(0);
+    // Center on first planet:
+    viewport.positionVector = world[0].positionVector.copy();
+    viewport.setZoom(1);
+    viewport.setSizeVector(createVector(700,10));
     viewport.render(world);
 }
 
